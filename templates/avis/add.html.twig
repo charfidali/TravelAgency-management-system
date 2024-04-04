@@ -1,0 +1,76 @@
+{% extends 'base.front.html.twig' %}
+{% block title %} Ajouter avis{% endblock %}
+{% block body %}
+  	<section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+			 
+				<div class="col-xl-6 offset-xl-3 text-center">
+					<div class="breadcrumb_content">
+						<h4 class="breadcrumb_title">Detail Hotel</h4>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+ 
+<section class="blog_post_container">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-xl-9">
+					<div class="main_blog_post_content">
+						<div class="mbp_thumb_post">
+							<div class="thumb">
+                                <img class="img-fluid w100" src="{{asset('uploads/images/'~hotel.getImage)}}" alt="{{ hotel.image }}">
+								<div class="tag"></div>
+								<div class="post_date"><h2></h2> <span></span></div>
+							</div>
+							<div class="details">
+								<h3> {{ hotel.nom | upper}}</h3>
+								<ul class="post_meta">
+									
+									<li><a href="#"><span> Nombre Etoiles: {{hotel.nbetoiles}}</span></a></li>
+                                    <li><a href="#"><span class="flaticon-placeholder"></span>Address: {{ hotel.adresse }}</a></li>
+								</ul>
+								<h4>Description</h4>
+								<p class="mb25">{{hotel.pointfort}}</p>
+								
+								
+							
+							
+							</div>
+
+						</div>
+                       
+						
+	
+						
+					</div>
+				</div>
+			
+			</div>
+		</div>
+        <div class="product_single_content style2" style="background-color:#fffaf0;">
+							<div class="mbp_comment_form style2">
+								
+                                
+                                <h4 style="text-align : center; color:red; font-weight :bold; ">Ajouter votre Rate !</h4>
+								
+										{{form_start(form)}}
+							<div class="form-group">
+								    	<label for="exampleInputName1">Rate selon Nombre étoiles !</label>
+								    	{{ form_widget (form.rate) }}
+
+							</div>
+									
+                                    {{ form_widget (form.Noter) }}
+								 {{form_end(form)}}
+							</div>
+		</div>
+	</section>
+    
+
+
+
+{% endblock %}

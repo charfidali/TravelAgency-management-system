@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<title>Register</title>
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+       {{ flash_error }}
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_start(f) }}
+        {{ form_row(f.username) }}
+        {{ form_row(f.email) }}
+        {{ form_row(f.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(f.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(f) }}
+{% endblock %}

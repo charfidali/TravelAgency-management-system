@@ -1,0 +1,24 @@
+{% extends './base-front.html.twig' %}
+
+ {% block body%}
+
+<h1>recherche avance</h1>
+{{(form(search_form))}}
+
+<form method="post" action="{{path('search_vols')}}">
+
+
+
+{%endblock%}
+
+{% block javascript%}
+
+{{parent ()}}
+<script>
+ $(document).ready(function(){
+  $('select').formSelect();
+
+ }) ;
+</script>
+
+{%endblock%}

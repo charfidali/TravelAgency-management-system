@@ -1,0 +1,68 @@
+{% extends 'base.back.html.twig' %}
+{% block body %}
+    <br>
+    {% block title %}<center><h1>Vols Calendar</h1></center>{% endblock %}
+    <br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js" integrity="sha256-ekrJn2FeZaiUFq99QswpQCUTME/HxaDfX7R8INzKJGE=" crossorigin="anonymous"></script>
+
+    <div id="calendrier">
+        <script src="{{ asset('assets/js/fullcalendar.js') }}"></script>
+    </div>
+
+    {% block stylesheet %}
+        <style>
+            #calendrier{
+
+                width: 600px;
+                margin: auto;
+                height:60%;
+            }
+        </style>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+    {% endblock %}
+
+    {% block javascript %}
+    <script>
+        window.onload = () =>{
+        let calendarElt=document.querySelector("#calendrier");
+        let calendar =new FullCalendar.Calendar(calendarElt,{
+        initialView: 'dayGridMonth',
+        locale: 'fr',
+        timeZone: 'Afrique/Tunisie',
+        headerToolbar: {
+        start: 'prev,next today',
+        center: 'title',
+        end: 'dayGridMonth'
+    },
+        events: {{data|raw}},
+                //can edit
+                editable: true,
+                //can make it 2 days for example
+                eventResizableFromStart: true
+            });
+            //get an object when you move an event
+            calendar.on('eventChange', (e)=>{
+                let url =`/api/${e.event.id}/edit`
+                let donnees={
+                    "destination_aller":e.event.extendedProps.destination_aller,
+                    "destination_retour":e.event.extendedProps.destination_retour,
+                    "title":e.event.title,
+                    "start":e.event.start,
+                    "date_retour":e.event.extendedProps.date_retour,
+                    "passagers":e.event.extendedProps.passagers,
+                    "cabine":e.event.extendedProps.cabine,
+                }
+                console.log(donnees);
+                let xhr = new XMLHttpRequest()
+                  xhr.open("PUT", url)
+
+            xhr.setRequestHeader("X-Requested-With","XMLHttpRequest") ;
+/* "X-Requested-With","XMLHttpRequest" */
+                xhr.send(JSON.stringify(donnees))
+
+            })
+            calendar.render();
+        }
+    </script>
+{% endblock %}{% endblock %}

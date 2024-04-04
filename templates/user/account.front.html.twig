@@ -1,0 +1,230 @@
+
+
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block class %}"header-nav menu_style_home_one dashbord_pages navbar-scrolltofixed stricky main-menu"{% endblock %}
+
+
+{% block body %}
+	<section class="dashboard_sidebar dn-1199">
+		<div class="dashboard_sidebars">
+			<div class="user_board">
+				<div class="user_profile">
+					<div class="media">
+					  	<div class="media-body">
+					    	<h4 class="mt-0">Start</h4>
+						</div>
+					</div>
+				</div>
+				<div class="dashbord_nav_list">
+					<ul>
+						<li><a href="page-dashboard.html"><span class="flaticon-puzzle-1"></span> Dashboard</a></li>
+						<li><a href="page-my-courses.html"><span class="flaticon-online-learning"></span> My Courses</a></li>
+						<li><a href="page-my-order.html"><span class="flaticon-shopping-bag-1"></span> Order</a></li>
+						<li><a href="page-my-message.html"><span class="flaticon-speech-bubble"></span> Messages</a></li>
+						<li><a href="page-my-review.html"><span class="flaticon-rating"></span> Reviews</a></li>
+						<li><a href="page-my-bookmarks.html"><span class="flaticon-like"></span> Bookmarks</a></li>
+						<li><a href="page-my-listing.html"><span class="flaticon-add-contact"></span> Add listing</a></li>
+					</ul>
+					<h4>Account</h4>
+					<ul>
+						<li class="active"><a href="page-my-setting.html"><span class="flaticon-settings"></span> Settings</a></li>
+						<li><a href="page-login.html"><span class="flaticon-logout"></span> Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our Dashbord -->
+	<div class="our-dashbord dashbord">
+		<div class="dashboard_main_content">
+			<div class="container-fluid">
+				<div class="main_content_container">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="dashboard_navigationbar dn db-1199">
+								<div class="dropdown">
+									<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
+									<ul id="myDropdown" class="dropdown-content">
+										<li><a href="page-dashboard.html"><span class="flaticon-puzzle-1"></span> Dashboard</a></li>
+										<li><a href="page-my-courses.html"><span class="flaticon-online-learning"></span> My Courses</a></li>
+										<li class="active"><a href="page-my-order.html"><span class="flaticon-shopping-bag-1"></span> Order</a></li>
+										<li><a href="page-my-message.html"><span class="flaticon-speech-bubble"></span> Messages</a></li>
+										<li><a href="page-my-review.html"><span class="flaticon-rating"></span> Reviews</a></li>
+										<li><a href="page-my-bookmarks.html"><span class="flaticon-like"></span> Bookmarks</a></li>
+										<li><a href="page-my-listing.html"><span class="flaticon-add-contact"></span> Add listing</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-lg-8 col-xl-12">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="dashboard_navigationbar dn db-1199">
+										<div class="dropdown">
+											<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
+											<ul id="myDropdown" class="dropdown-content">
+												<li><a href="page-dashboard.html"><span class="flaticon-puzzle-1"></span> Dashboard</a></li>
+												<li><a href="page-my-courses.html"><span class="flaticon-online-learning"></span> My Courses</a></li>
+												<li><a href="page-my-order.html"><span class="flaticon-shopping-bag-1"></span> Order</a></li>
+												<li><a href="page-my-message.html"><span class="flaticon-speech-bubble"></span> Messages</a></li>
+												<li><a href="page-my-review.html"><span class="flaticon-rating"></span> Reviews</a></li>
+												<li><a href="page-my-bookmarks.html"><span class="flaticon-like"></span> Bookmarks</a></li>
+												<li><a href="page-my-listing.html"><span class="flaticon-add-contact"></span> Add listing</a></li>
+												<li class="active"><a href="page-my-setting.html"><span class="flaticon-settings"></span> Settings</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+										<h4 class="title float-left">User Profile</h4>
+										<ol class="breadcrumb float-right">
+									    	<li class="breadcrumb-item"><a href="#">Home</a></li>
+									    	<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+										</ol>
+									</nav>
+								</div>
+								<div class="col-lg-12">
+									<div class="my_course_content_container">
+										<div class="my_setting_content mb30">
+											<div class="my_setting_content_header">
+												<div class="my_sch_title">
+													<h4 class="m0">Personal Details</h4>
+												</div>
+											</div>
+                                           {{form_start(f)}}
+											<div class="row my_setting_content_details pb0">
+   <div class="col-xl-2">
+												
+<style>
+.circular--square { border-top-left-radius: 50% 50%; border-top-right-radius: 50% 50%; border-bottom-right-radius: 50% 50%; border-bottom-left-radius: 50% 50%; }
+</style>	  
+
+							
+									<img class="circular--square" src="http://127.0.0.1/pictures/imagesuser/{{ h.getImgName() }}" alt="3a.jpg">
+							
+						{{ form_widget (f.img_name) }}
+					
+  
+
+
+
+
+
+
+												
+</div>                     
+                                             
+												<div class="col-xl-10">
+													<div class="row">
+														<div class="col-xl-6">
+															<div class="my_profile_setting_input form-group">
+                                                            	<label for="formGroupExampleInput1">Prénom</label>
+														    	{{ form_widget (f.firstname) }}
+															</div>
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput2">Pseudo</label>
+														    	 {{ form_widget (f.usernamee) }}
+															</div>
+														</div>
+														<div class="col-xl-6">
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput3">Nom</label>
+														    {{ form_widget (f.lastname) }}
+															</div>
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput2">E-mail</label>
+														    	{{ form_widget (f.email) }}
+															</div>
+														</div>
+
+														<div class="col-xl-6">
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput1">Date de naissance</label>
+														    		{{ form_widget (f.date_d_n) }}
+															</div>
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput2">GSM</label>
+														    	{{ form_widget (f.tel_num) }}
+															</div>
+														</div>
+                                                        <div class="col-xl-6">
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput1">Sexe</label>
+														    		{{ form_widget (f.sexe) }}
+															</div>
+															<div class="my_profile_setting_input form-group">
+														    	<label for="formGroupExampleInput2">Adresse</label>
+														    		{{ form_widget (f.adresse) }}
+															</div>
+														</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        											    <div class="col-lg-12">
+														 {{ form_widget (f.Sauvgarder) }}
+											    </div>
+                                               
+													</div>
+												</div>
+	
+											</div>
+                                {{form_end(f)}}
+											<div class="row my_setting_content_details">
+						
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+        {% block javascripts %}
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-3.0.0.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mmenu.all.js"></script>
+<script type="text/javascript" src="js/ace-responsive-menu.js"></script>
+<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="js/isotop.js"></script>
+<script type="text/javascript" src="js/snackbar.min.js"></script>
+<script type="text/javascript" src="js/simplebar.js"></script>
+<script type="text/javascript" src="js/parallax.js"></script>
+<script type="text/javascript" src="js/scrollto.js"></script>
+<script type="text/javascript" src="js/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="js/jquery.counterup.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript" src="js/progressbar.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/timepicker.js"></script>
+<script type="text/javascript" src="js/smartuploader2.js"></script>
+<script type="text/javascript" src="js/dashboard-script.js"></script>
+<!-- Custom script for all pages -->
+<script type="text/javascript" src="js/script.js"></script>
+
+        {% endblock %}

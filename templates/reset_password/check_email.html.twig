@@ -1,0 +1,53 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Password Reset Email Sent{% endblock %}
+
+{% block body %}
+
+   
+    	<section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6 offset-xl-3 text-center">
+					<div class="breadcrumb_content">
+						<h4 class="breadcrumb_title">Logın</h4>
+						<ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="#">Logın</a></li>
+						    <li class="breadcrumb-item active" aria-current="page">check email</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our LogIn Register -->
+	<section class="our-log bgc-fa">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-6 offset-lg-3">
+					<div class="login_form inner_page">
+							<div class="heading">
+								<h3 class="text-center"> 
+                                	<p class="text-center">Don't have an account? <a class="text-thm" href="/register">Sign Up!</a></p>
+                                    <br>
+                                       <p>
+        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p></h3>
+						
+							
+							</div>
+
+		
+
+
+							</div>
+							 	
+					 <p class="text-center">If you don't receive an email please check your spam folder or</p><a href="{{ path('app_forgot_password_request') }}"><button  class="btn btn-log btn-block btn-thm2">try again .</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}dashborad{% endblock %}
+        
+
+          
+{% block body %}
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+   <div class="col-lg-15">
+<div id="chart"></div>
+          </div>
+          <!--  /col-lg-12 -->
+        </div>
+        <!--  /row -->
+      </section>
+ 
+    <!--main content end-->
+    <!--footer start-->
+
+ 
+ 
+<script src='https://unpkg.com/apexcharts/dist/apexcharts.min.js'></script>
+
+<script>
+{% set pii = []  %}
+{% set counting = []  %}
+{% for c in values %}
+{% set p = c.temp|date('m-d-Y') %}
+{% set count = c.counting %}
+{% set counting = counting|merge([count]) %}
+{% set pii = pii|merge([p]) %}
+var date ={{ pii|json_encode|raw }};
+var count ={{ counting|json_encode|raw }};
+ {% endfor %}
+
+var options = {
+  chart: {
+    height: 380,
+    type: "line"
+  },
+  series: [
+    {
+      name: "Nombre de visite",
+      type: "column",
+      data: count
+    }
+  ],
+  stroke: {
+    width: [0, 4],
+    curve: 'smooth'
+  },
+  title: {
+    text: "Nombre de visite"
+  },
+  // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  labels:  date,
+  xaxis: {
+    type: "datetime"
+  }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+</script>
+    <!--footer end-->
+  </section>
+{% endblock %}
+
+{% block javascripts_this_page %}
+
+{% endblock %}

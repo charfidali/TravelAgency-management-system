@@ -1,0 +1,81 @@
+
+{% extends 'base.back.html.twig' %}
+
+{% block title %} ajouter voitures {% endblock %}
+
+{% block body %}
+
+
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i>Ajouter Voiture</h3>
+           
+           {{ form_start (v,{attr:{novalidate:'novalidate'}}) }}
+
+            <div class="row mt">
+                <div class="col-lg-12">
+                    
+                    <div class="form-panel">
+                        <div class=" form">
+                            <form class="cmxform form-horizontal style-form" id="commentForm" method="get" action="">
+                                <div class="form-group ">
+                                    <label for="cname" class="control-label col-lg-2">matricule</label>
+                                    {{ form_widget (v.matricule) }}
+                                    {{ form_errors (v.matricule,{'attr':{'class':'text-danger'}}) }}
+                                </div>
+                                <div class="form-group ">
+                                    <label for="cnbetoils" class="control-label col-lg-2">marque </label>
+                                    {{ form_widget (v.marque) }}
+                                    {{ form_errors (v.marque,{'attr':{'class':'text-danger'}}) }}
+                                </div>
+                                <div class="form-group ">
+                                    <label for="curl" class="control-label col-lg-2">model</label>
+                                    {{ form_widget (v.model) }}
+                                    {{ form_errors (v.model,{'attr':{'class':'text-danger'}}) }}
+                                </div>
+                                <div class="form-group ">
+                                    <label for="curl" class="control-label col-lg-2">nombre de sieges</label>
+                                    {{ form_widget (v.nbsieges) }}
+                                    {{ form_errors (v.nbsieges,{'attr':{'class':'text-danger'}}) }}
+                                </div>
+                                <div class="form-group ">
+                                    <label for="curl" class="control-label col-lg-2">prix</label>
+                                    {{ form_widget (v.prix) }}
+                                    {{ form_errors (v.prix,{'attr':{'class':'text-danger'}}) }}
+                                </div>
+
+
+                                <div class="form-group last">
+                                    <label class="control-label col-md-3">Image Upload</label>
+                                    <div class="col-md-9">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                            <div>
+                          <span class="btn btn-theme02 btn-file">
+                            {{ form_widget (v.image) }}
+
+                          </span>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    {{ form_widget (v.ajouter) }}
+                                    
+                                    {{form_end (v)}}
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /form-panel -->
+                </div>
+                <!-- /col-lg-12 -->
+            </div>
+            
+            <!-- /row -->
+            <!-- /row -->
+       {% endblock %}

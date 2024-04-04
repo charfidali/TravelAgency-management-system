@@ -1,0 +1,6 @@
+ {{ form_start(chambre,{attr:{novalidate:'novalidate'}}) }}
+{{ form_start(chambre) }}
+    {{ form_widget(chambre) }}
+     {{ form_errors(chambre,{'attr':{'class':'text-danger'}}) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(chambre) }}

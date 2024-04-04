@@ -1,0 +1,122 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}Ajouter Hotels{% endblock %}
+
+{% block body %}
+
+<section id="main-content">
+    <section class="wrapper">
+    
+      <h3><i class="fa fa-angle-right"></i> List des hotels</h3>
+      <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <!--<ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>-->
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');                        
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchHotel') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'hotels') {
+                                                    if (id !== 'error') {
+                                                        //console.log(value[1]);
+                                                        console.log(value[0]);
+                                                        entitySelector.append('<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">'+
+                    '<div class="custom-box">'+
+                      '<div class="icn-main-container">'+
+                        '<img src="uploads/image/'+value[0]+'" height="200" width="200">'+
+                      '</div>'+
+                      '<ul class="pricing">'+
+                        '<li>'+value[1]+'</li>'+
+                        '<li>adresse : '+value[2]+'</li>'+
+                        '<li>nombre des étoiles : '+value[3]+'</li>'+
+                        '<li>descriptions : '+value[4]+'</li>'+
+                      '</ul>'+
+                      '<ul class="pricing">'+
+                      '</ul>'+
+                      '<a class="btn btn-success" href="{{ path('modifhotels',{'id':'+value[5]+'}) }}">Modifier</a>'+
+                      '<a class="btn btn-danger" href="{{ path('supp_Hotels',{'id':'+value[5]+'}) }}">Supprimer</a>'+
+                    '</div>'+
+                    '<!-- end custombox -->'+
+                  '</div>'
+);
+                                                       //entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="public/picture/'+value[1]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+       <div class="input-group custom-search-form" id="entitiesNav">
+
+                    
+                {% for hotels in h %}
+
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="custom-box">
+                      <div class="icn-main-container">
+                        <img src="uploads/images/{{ hotels.getImage() }}" height="200" width="200">
+                      </div>
+                      <ul class="pricing">
+                        <li>{{ hotels.nom }}</li>
+                        <li>adresse : {{ hotels.adresse }}</li>
+                        <li>nombre des étoiles : {{ hotels.nbetoiles }}</li>
+                        <li>descriptions : {{ hotels.pointfort }}</li>
+                      </ul>
+                      <ul class="pricing">
+                      </ul>
+                      <a class="btn btn-success" href="{{ path('modifhotels',{'id':hotels.id}) }}">Modifier</a>
+                      <a class="btn btn-danger" href="{{ path('supp_Hotels',{'id':hotels.id}) }}">Supprimer</a>
+                    </div>
+                    <!-- end custombox -->
+                  </div>
+
+                {% endfor %}
+                {{ knp_pagination_render(h) }}
+
+               
+    </section>
+    <!-- /wrapper -->
+
+  <!-- /MAIN CONTENT -->
+  <!--main content end-->
+
+
+</section>
+                {% endblock %}

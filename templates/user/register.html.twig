@@ -1,0 +1,114 @@
+
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+	<!-- Inner Page Breadcrumb -->
+	<section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6 offset-xl-3 text-center">
+					<div class="breadcrumb_content">
+						<h4 class="breadcrumb_title">Register</h4>
+						<ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="#">Home</a></li>
+						    <li class="breadcrumb-item active" aria-current="page">Register</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our LogIn Register -->
+	<section class="our-log-reg bgc-fa">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-6 offset-lg-3">
+					<div class="sign_up_form inner_page">
+						<div class="heading">
+						
+						    {% for flash_error in app.flashes('verify_email_error') %}
+        			<h3 class="text-center">{{ flash_error }}</h3>
+    						{% endfor %}
+							<h3 class="text-center">Register to start learning</h3>
+							<p class="text-center">Have an account? <a class="text-thm" href="/login">Login</a></p>
+							<h4 class="text-center">{{ form_errors(f.email) }}</h4>
+							<h4 class="text-center">{{ form_errors(f.plainPassword.first) }}</h4>
+						</div>
+						<div class="details">
+						  {{ form_start(f,{'attr':{'novalidate':'novalidate'}}) }}
+								
+						<div class="input-group">
+								
+								  
+								  {{ form_widget (f.username) }}
+								
+						
+						
+							<span class="input-group-btn" style="width:5px;"></span>
+							    	 
+									 {{ form_widget (f.email) }}
+							
+						</div>
+								
+								
+								
+								<div class="input-group">
+							    	 {{ form_widget (f.plainPassword.first) }}
+								<span class="input-group-btn" style="width:5px;"></span>
+								
+							    	{{ form_widget (f.plainPassword.second) }}
+								</div>
+								 
+								 
+								 
+								<div class="input-group">
+							    	 {{ form_widget (f.firstname) }}
+								<span class="input-group-btn" style="width:5px;"></span>
+								
+							    	{{ form_widget (f.lastname) }}
+								</div>	 
+								 
+							<div class="input-group">
+
+        							{{ form_widget (f.date_d_n) }}
+<span class="input-group-btn" style="width:5px;"></span>
+								
+							    	{{ form_widget (f.sexe) }}
+								</div>	 							 
+								 
+												<div class="input-group">
+
+        							{{ form_widget (f.tel_num) }}
+<span class="input-group-btn" style="width:5px;"></span>
+								
+							    	{{ form_widget (f.adresse) }}
+								</div>	 			 
+
+								 
+								 {{ form_widget (f.Register) }}
+								<hr>
+								
+								
+								
+								
+								<div class="row mt40">
+									<div class="col-lg">
+										<button type="submit" class="btn btn-block color-white bgc-fb"><i class="fa fa-facebook float-left mt5"></i> Facebook</button>
+									</div>
+									<div class="col-lg">
+										<button type="submit" class="btn btn-block color-white bgc-gogle"><i class="fa fa-google float-left mt5"></i> Google</button>
+									</div>
+								</div>
+							{{form_end(f)}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+

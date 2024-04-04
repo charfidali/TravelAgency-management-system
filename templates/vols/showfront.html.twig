@@ -1,0 +1,153 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Vols index{% endblock %}
+
+{% block body %}
+ <section class="inner_page_breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 text-center">
+                    <div class="breadcrumb_content">
+                        <h4 class="breadcrumb_title">Vols</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Vols</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+<form method="post" action="{{ path('vols_index') }}">
+
+    <label>Entrer votre Destination aller</label>
+    <label>
+        <input type="text" name="data" class="form-control">
+    </label><input type="submit" class="btn btn-style btn-primary" value="Recherche">
+<table class="table" id="t" >
+    <div class="row mt">
+        <div class="col-md-12">
+
+            <table class="table table-striped table-advance table-hover">
+
+                <h4><i class="fa fa-angle-right"></i> Vols disponibles </h4>
+                <hr>
+                <thead>
+
+                <tr>
+
+                    <th><i class=" fa fa-edit"></i> Id</th>
+                    <th>Destination_aller</th>
+                    <th>Destination_retour</th>
+                    <th>Voyage</th>
+                    <th>Date_depart</th>
+                    <th>Date_retour</th>
+                    <th>Passagers</th>
+                    <th>Cabine</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="all">
+                {% for vol in vols %}
+
+                <tr>
+                    <td>{{ vol.id }}</td>
+                    <td>{{ vol.destinationAller}}</td>
+                    <td>{{ vol.destinationRetour }}</td>
+                    <td>{{ vol.voyage }}</td>
+                    <td>{{ vol.dateDepart ? vol.dateDepart|date('Y-m-d') : '' }}</td>
+                    <td>{{ vol.dateRetour ? vol.dateRetour|date('Y-m-d') : '' }}</td>
+                    <td>{{ vol.passagers }}</td>
+                    <td>{{ vol.cabine }}</td>
+
+
+
+                </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+                <tbody id="search">
+                </tbody>
+            </table>
+            </tbody>
+</table>
+    </div>
+    <!-- /content-panel -->
+    </div>
+    <!-- /col-md-12 -->
+    </div>
+</div>
+
+
+
+    </center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+
+            /*begin rechercher avancee multicritéres selon sujet et staus*/
+            $("#divs").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $("#search").val();
+                //    alert(value);
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('search_recc') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value,
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append(
+                                    '<tr>' +
+                                    '<td> '+obj.id +'  </td>' +
+                                    '<td> '+obj.destinationAller +'  </td>' +
+                                    '<td> '+obj.destinationRetour +'  </td>' +
+                                    '<td> '+obj.voyage +'  </td>' +
+                                    '<td> '+obj.dateDepart +'  </td>' +
+                                    '<td> '+obj.dateRetour +'  </td>' +
+                                    '<td> '+obj.passagers +'  </td>' +
+                                    '<td> '+obj.cabine +'  </td>' +
+
+
+
+                                    ' </tr>');
+                            });
+                        }
+                        else
+                        {
+
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+
+                        }
+                    },
+                });
+                return false;
+            });
+            /*end rechercher avancee multicritéres selon sujet et staus*/
+        });
+    </script>
+
+</form>
+
+{% endblock %}
+
+
+
+
+

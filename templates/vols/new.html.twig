@@ -1,0 +1,26 @@
+{% extends 'base.back.html.twig' %}
+{% block title %}Ajouter Vols{% endblock %}
+
+{% block body %}
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+        <h1> <font face="verdana" size="20px" color="#FF7A59"> Ajouter des vols</font> </h1>
+
+    <table  cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+    <tr>
+
+<td> {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <a href="{{ path('app_vols_index') }}"> <button class="btn btn-round btn-success btn-xs"><i class="fa fa-arrow-circle-left "></i></button> </a>
+
+      {{ include('vols/_form.html.twig') }}
+    </tr>
+</table>
+  </div>
+          <!--  /col-lg-12 -->
+        </div>
+        <!--  /row -->
+      </section>
+       </section>
+{% endblock %}
+

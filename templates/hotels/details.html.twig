@@ -1,0 +1,114 @@
+{% extends 'base.front.html.twig' %}
+{% block title %} Detail Hotel {% endblock %}
+{% block body %}
+ 	<section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+			 
+				<div class="col-xl-6 offset-xl-3 text-center">
+					<div class="breadcrumb_content">
+						<h4 class="breadcrumb_title">Detail Hotel</h4>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<section class="blog_post_container">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-xl-9">
+					<div class="main_blog_post_content">
+						<div class="mbp_thumb_post">
+							<div class="thumb">
+                                <img class="img-fluid w100" src="{{asset('uploads/images/'~hotel.getImage)}}" alt="{{ hotel.image }}">
+								<div class="tag"></div>
+								<div class="post_date"><h2></h2> <span></span></div>
+							</div>
+							<div class="details">
+								<h3>{{ hotel.nom | upper}}</h3>
+								<ul class="post_meta">
+									
+									<li><a href="#"><span class="flaticon-comment"></span></a></li>
+									<li><a href="#"><span>{{commentaires |length }} comments</span></a></li>
+                                    <li><a href="#"><span class="flaticon-placeholder"></span>Address: {{ hotel.adresse }}</a></li>
+								</ul>
+								<h4>Description</h4>
+								
+								<p class="mb25">{{hotel.pointfort}}</p>
+							</div>
+						
+						</div>
+			            
+						<div class="product_single_content style2 mb30" style="background-color:#fdf5e2;">
+							<h4 class="aii_title" style="text-align : center; color:red; font-weight :bold;">Commentaires </h4>
+							<div class="mbp_pagination_comments">
+															 {% for comment in commentaires %}
+
+								<div class="mbp_first media" style="background-color:white; height:150px;">
+									<img src="{{asset('images/resource/'~user.getImgName)}}" class="mr-3" alt="review1.png" style="margin-left:10px;margin-top:10px;">
+									<div class="media-body" style="margin-left:40px;">
+								    <p style="color:black;"> Nom utilisateur :{{comment.user}}</p>
+								    <div style="">	<p class="fz15 mt20" style="color:black;"><b>{{comment.text}}</b></p></div>
+									    <p >publié le : {{comment.createdAt |date("d/m/Y  h:m")}}</p>
+									</div>
+									{% if comment.user == user %}
+
+									  <div class="text-center mt50 mb30">
+                                     <a href="{{ path( 'deleteCommentaire' , {'id':comment.id} )}}"><button class="btn btn-danger">supprimer</button></a>
+                                      </div>
+									  {% endif %}
+								 
+
+								</div>
+								{% endfor %}
+					
+								<div class="custom_hr style3"></div>
+								
+							</div>
+						</div>
+						<div class="product_single_content style2" style="background-color:#CFE2F3;">
+							<div class="mbp_comment_form style2">
+								<h4 style="text-align : center; color:red; font-weight :bold;">Ajouter Commentaire</h4>
+						
+							{{form_start(form)}}
+							<div class="form-group">
+								    	<label for="exampleInputName1">Votre Commentaire</label>
+								    	{{ form_widget (form.text) }}
+
+							</div>
+									
+                                    {{ form_widget (form.Commenter) }}
+								 {{form_end(form)}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-xl-3 pl10 pr10">
+					<div class="main_blog_post_widget_list">
+						
+						
+						<div class="blog_recent_post_widget media_widget">
+							<h4 class="title">Nos Meilleurs Hotel</h4>
+							{% for hotel in hotels %}
+							<div class="media">
+							
+                                <img class="img-fluid w100" src="{{asset('uploads/images/'~hotel.getImage)}}" alt="{{ hotel.image }}">
+								<div class="media-body">
+							    	<h5 class="mt-0 post_title">{{hotel.nom}}</h5>
+							    	<a href="{{ path( 'hotel_show' , {'id':hotel.id} )}}">Voir Details</a>
+								</div>
+							
+							</div>
+							{% endfor %}
+							
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endblock %}

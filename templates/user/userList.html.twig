@@ -1,0 +1,72 @@
+
+{% extends 'base.back.html.twig' %}
+
+{% block title %}users liste{% endblock %}
+
+{% block body %}
+<section id="main-content">
+<section class="wrapper">
+  <div class="row mt center">
+  <div class="col-sm-5 col-md-4 col-lg-5">
+  <div class="form-panel">
+  <form class="form-horizontal" method="get">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Chercher</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control round-form">
+                  </div>
+                </div>
+                  </form>
+                 </div>
+                  </div>
+                  </div>
+        <div class="row">
+          <div class="col-lg-12">
+
+{% for c in user %}
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="custom-box">
+                <div class="icn-main-container">
+                  <img src="http://127.0.0.1/pictures/imagesuser/{{ c.getImgName() }}" height="200" width="200">
+                </div>
+                <ul class="pricing">
+                 <li>E-mail : {{ c.email }}</li>
+                 <li>Role(s) : {{ c.roles|join('/////') }}</li>
+               <li>Prénom : {{ c.firstname }}</li>
+                <li>Nom : {{ c.lastname }}</li>
+                <li>Date de naissance : {{ c.getDateDN()|date('d-m-Y') }}</li>
+                <li>sexe : {{ c.sexe }}</li>
+                <li>GSM : {{ c.getTelNum() }}</li>
+                <li>Adresse : {{ c.adresse}}</li>
+                </ul>
+                                <ul class="pricing">
+                </ul>
+              {% if c.getdisable() == false  %}
+                <a class="btn btn-theme" href="{{ path('disable', {'id': c.id}) }}">disable</a>
+              {% else %}
+                <a class="btn btn-theme" href="{{ path('enable', {'id': c.id}) }}">enable</a>
+                  {% endif %}
+                  {% if c.getroles == ['ROLE_CLIENT','ROLE_ADMIN']  %}
+                  
+                    <a class="btn btn-theme" href="{{ path('downupgrade', {'id': c.id}) }}">fire him</a>
+                  {% else %}
+                     <a class="btn btn-theme" href="{{ path('upgrade', {'id': c.id}) }}">make him admin</a>
+                  {% endif %}
+                   <a class="btn btn-theme" href="{{ path('delete', {'id': c.id}) }}">Delete</a>
+              </div>
+              <!-- end custombox -->
+            </div>
+            {% endfor %}
+            <!-- end col-4 -->
+  
+            <!-- end col-4 -->
+          </div>
+          <!--  /col-lg-12 -->
+        </div>
+        <!--  /row -->
+      </section>
+        <center>{{ knp_pagination_render(user) }}</center>
+      </section>
+ 
+{% endblock %}

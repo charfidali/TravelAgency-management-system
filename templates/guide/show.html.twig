@@ -1,0 +1,62 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}Guide{% endblock %}
+
+{% block body %}
+
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+<h1> <font face="verdana" size="20px" color="#FF7A59">Guides</font> </h1>
+
+
+<div class="adv-table">
+    <table  cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+
+        <font face="verdana" size="20px" >
+            <thead>
+            <tr class="gradeX">
+                <th>Id</th>
+                <td class="hidden-phone"> {{ guide.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ guide.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ guide.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ guide.email }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ guide.numero }}</td>
+            </tr>
+            </thead>
+
+            <td>
+
+
+            </td>
+        </font> </tr>
+
+   <td>
+       <a href="{{ path('app_guide_index') }}">   <button class="btn btn-round btn-success btn-xs"><i class="fa fa-arrow-circle-left "></i></button> </a>
+            </td>
+<td>
+    <a href="{{ path('app_guide_edit', {'id': guide.id}) }}">
+        <button class="btn btn-round btn-success btn-xs"><i class="fa fa-edit "></i></button> </a>
+            </td>
+
+            <td> {{ include('guide/_delete_form.html.twig') }} </td>
+
+    </table>
+</div>
+        </div>
+        <!--  /row -->
+      </section>
+       </section>
+{% endblock %}

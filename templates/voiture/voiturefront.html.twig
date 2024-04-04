@@ -1,0 +1,71 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %} Voitures {% endblock %}
+
+{% block aside %} <section class="inner_page_breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 text-center">
+                    <div class="breadcrumb_content">
+                        <h4 class="breadcrumb_title">Voiture</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Voiture</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  {% endblock %}
+
+{% block body %}
+
+
+
+    <section class="blog_post_container">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="main_blog_post_content">
+
+                        {% for voiture in v %}
+
+                            <div class="row event_lists p0">
+                                <div class="col-xl-5 pr15-xl pr0">
+                                    <div class="blog_grid_post event_lists mb35">
+                                        <div class="thumb">
+                                            <img class="img-fluid w100" src="uploads/images/{{ voiture.getImage() }}" alt="{{ voiture.image }}">
+
+                                            <div class="post_date"><h2>{{ voiture.prix }}</h2> <span>DT par jour</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-7 pl15-xl pl0">
+                                    <div class="blog_grid_post style2 event_lists mb35">
+                                        <div class="details">
+                                            <h3>{{ voiture.marque }}</h3>
+                                            <p>{{ voiture.model }}</p>
+                                            <p>prix par jour: {{ voiture.prix }}</p>
+                                            <ul class="mb0">
+
+                                                <li> <span class="flaticon-placeholder"></span>nombre de siège: {{ voiture.nbsieges }}</a></li>
+                                            <div class="text-center mt50 mb30">
+									<button type="button" class="more-review-btn btn"><li><a href="{{ path('Voiture_singel', {'id': voiture.id}) }}">voir plus</a></li></button>
+								</div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {{ knp_pagination_render(v) }}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  {% endblock %}

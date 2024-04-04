@@ -1,0 +1,56 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Changer Mot De Passe{% endblock %}
+
+{% block body %}
+	<section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6 offset-xl-3 text-center">
+					<div class="breadcrumb_content">
+						<h4 class="breadcrumb_title">Logın</h4>
+						<ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="#">Home</a></li>
+						    <li class="breadcrumb-item active" aria-current="page">Reset password</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our LogIn Register -->
+	<section class="our-log bgc-fa">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-6 offset-lg-3">
+					<div class="login_form inner_page">
+		{{ form_start(resetForm,{attr:{novalidate:'novalidate'}}) }}
+							<div class="heading">
+								<h3 class="text-center">Reset password</h3>
+						
+								<p class="text-center">Don't have an account? <a class="text-thm" href="/register">Sign Up!</a></p>
+							</div>
+
+							 <div class="form-group">
+						    	{{ form_row(resetForm.plainPassword) }}
+						
+							</div>
+							<div class="form-group">
+        <div>
+            <small>
+                Enter your email address and we will send you a
+                link to reset your password.
+            </small>
+        </div>
+
+							</div>
+							 	<button type="submit" class="btn btn-log btn-block btn-thm2">Reset password</button>
+					 {{ form_end(resetForm) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+

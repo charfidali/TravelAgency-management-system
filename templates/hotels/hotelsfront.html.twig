@@ -1,0 +1,198 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %} Hotels {% endblock %}
+
+{% block aside %} <section class="inner_page_breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 text-center">
+                    <div class="breadcrumb_content">
+                        <h4 class="breadcrumb_title">Hotels</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Hotels</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  {% endblock %}
+
+{% block body %}
+
+
+
+    <!-- Main Blog Post Content -->
+
+ <!-- <section id="main-content">
+    <section class="wrapper">
+    
+      <h3><i class="fa fa-angle-right"></i> </h3>
+      <input type="text" id="search" class="form-control" placeholder="Search here"> -->
+
+  <section id="main-content">
+    <section class="wrapper">
+    <section id="our-newslatters" class="our-newslatters">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="main-title text-center">
+						<h3 class="mt0">Votre destination </h3>
+						<p>bienvenue sur byondtravel ou vous trouver les meilleurs Hotels </p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="footer_apps_widget_home1">
+						<form class="form-inline mailchimp_form">
+							<input type="text" id="search" class="form-control" placeholder="Search here">
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    
+    
+     
+                </div>
+                <!-- /input-group -->
+            </div>
+            <!--<ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>-->
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');                        
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchHotel') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'hotels') {
+                                                    if (id !== 'error') {
+                                                        //console.log(value[1]);
+                                                        console.log(value[0]);
+                                                        entitySelector.append('<div class="row event_lists p0">'+
+                            '<div class="col-xl-5 pr15-xl pr0">'+
+                                '<div class="blog_grid_post event_lists mb35">'+
+                                    '<div class="thumb">'+
+                                        '<img class="img-fluid w100" src="uploads/image/'+value[0]+'">'+
+
+                                        '<div class="post_date"><h2>'+value[3]+'</h2> <span>Etoiles</span></div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="col-xl-7 pl15-xl pl0">'+
+                                '<div class="blog_grid_post style2 event_lists mb35">'+
+                                    '<div class="details">'+
+                                        '<h3>'+value[1]+'</h3>'+
+                                        
+                                        '<ul class="mb0">'+
+
+                                            '<li><a href="#"><span class="flaticon-placeholder"></span>Address: '+value[2]+'</a></li>'+
+                                            
+								'<div class="text-center mt50 mb30">'+
+									'<button type="button" class="more-review-btn btn"><li><a href="{{ path('Hotels_singel', {'id': '+value[5]+'}) }}">voir plus</a></li></button>'+
+								'</div>'+
+                                            
+                                        '</ul>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+);
+                                                       //entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="public/picture/'+value[1]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+   
+    <section class="blog_post_container">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="main_blog_post_content">
+
+                        {% for hotels in h %}
+
+                        <div class="row event_lists p0">
+                            <div class="col-xl-5 pr15-xl pr0">
+                                <div class="blog_grid_post event_lists mb35">
+                                    <div class="thumb">
+                                        <img class="img-fluid w100" src="uploads/images/{{ hotels.getImage() }}" alt="{{ hotels.image }}">
+
+                                        <div class="post_date"><h2>{{ hotels.nbetoiles }}</h2> <span>Etoiles</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 pl15-xl pl0">
+                                <div class="blog_grid_post style2 event_lists mb35">
+                                    <div class="details">
+                                        <h3>{{ hotels.nom }}</h3>
+                                        
+                                        <ul class="mb0">
+
+                                            <li><a href="#"><span class="flaticon-placeholder"></span>Address: {{ hotels.adresse }}</a></li>
+                                <div class="text-center mt50 mb30">
+                                     <a href="{{ path( 'avis_add' , {'id':hotels.id} )}}" target="new_blank"><button class="btn btn-success">Ajouter avis</button></a>
+                                     <a href="{{ path( 'hotel_show' , {'id':hotels.id} )}}" target="new_blank"><button class="btn btn-danger">Commentaire</button></a>
+                                </div>
+                                            
+								<div class="text-center mt50 mb30">
+                                
+									<button type="button" class="more-review-btn btn"><li><a href="{{ path('Hotels_singel', {'id': hotels.id}) }}">voir plus</a></li></button>
+								</div>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        {{ knp_pagination_render(h) }}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     {% endblock %}

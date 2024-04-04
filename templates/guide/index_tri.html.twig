@@ -1,0 +1,82 @@
+{% extends 'base.front.html.twig' %}
+
+
+{% block title %}Guide {% endblock %}
+
+{% block body %}
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+    <form method="post" action="{{ path('testri') }}">
+
+        <label>Ordre:
+            <select class="form-control" name="type">
+                <option>Croissant</option>
+                <option>Décroissant</option>
+            </select>
+        </label>
+
+        <label>Critère
+            <select class="form-control" name="special">
+
+                <option>nom</option>
+            </select>
+        </label>
+
+
+        <input type="submit" class="btn btn-style btn-primary" value="Trier">
+    </form>
+<form method="post" action="{{ path('guides_index') }}">
+
+    <label>Entrer votre nom</label>
+    <label>
+        <input type="text" name="data" class="form-control">
+    </label><input type="submit" class="btn btn-style btn-primary" value="Recherche">
+    <table class="table">
+        <div class="row mt">
+            <div class="col-md-12">
+
+                <table class="table table-striped table-advance table-hover">
+
+                    <h4><i class="fa fa-angle-right"></i> Guides</h4>
+                    <hr>
+                    <thead>
+
+                    <tr>
+                        <th><i class=" fa fa-edit"></i> Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Email</th>
+                        <th>Numero</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for guide in guide %}
+                    <tr>
+                        <td>{{ guide.id }}</td>
+                        <td>{{ guide.nom }}</td>
+                        <td>{{ guide.prenom }}</td>
+                        <td>{{ guide.email }}</td>
+                        <td>{{ guide.numero }}</td>
+
+                    </tr>
+            </div>
+            <!-- /content-panel -->
+        </div>
+        <!-- /col-md-12 -->
+        </div>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+
+        <tbody id="search">
+        </tbody>
+    </table>
+        </div>
+        <!--  /row -->
+      </section>
+       </section>
+{% endblock %}
